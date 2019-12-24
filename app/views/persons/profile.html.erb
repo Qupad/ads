@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Profile </h1>
+<p>My articles: </p>
+
+<div style="position: absolute; top: 0; right: 0 ">
+	<span>Hi, <%= current_user.email %> </span>
+	<%= link_to 'Home', controller: 'articles' %>
+</div>
+
+<table>
+  <tr>
+  	<th>Author</th>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Text</th>
+    <th>Category</th>
+    <th></th>
+  </tr>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+    	<td><%= article.user.email %></td>
+      <td><%= article.title %></td>
+      <td><%= article.life_cycle %></td>
+      <td><%= article.text %></td>
+      <td><%= article.category.name %></td>
+      <% if article.life_cycle == 'draft' %>
+        <td><%= link_to 'Show', article_path(article) %></td>
+        <td><%= link_to 'Update ', edit_article_path(article) %></td>
+        <td><%= link_to 'Send ', send_to_approve_path(article), data: { confirm: 'Ur post will be send to moderation. Are u sure?' }  %></td>
+        <td><%= link_to 'Delete', article_path(article), :method => :delete %></td>
+      <% else %>
+        <td><%= link_to 'Show', article_path(article) %></td>
+        <td><%= link_to 'Delete', article_path(article), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
