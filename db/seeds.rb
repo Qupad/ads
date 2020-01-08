@@ -5,4 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-AdminUser.create!(email: 'admin@aa.a', password: 'password', password_confirmation: 'password') if Rails.env.development?
+# AdminUser.create!(email: 'admin@aa.a', password: 'password', password_confirmation: 'password') if Rails.env.development?
+#
+require 'faker'
+
+
+
+first = User.last
+buy = Category.find_by_name('Buying')
+sell = Category.find_by_name('Selling')
+hire = Category.find_by_name('Hiring')
+
+50.times do 
+	Article.create(title: Faker::String.random, text: Faker::String.random, user: first, category: sell)
+end
