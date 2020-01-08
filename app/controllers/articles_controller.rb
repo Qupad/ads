@@ -1,15 +1,16 @@
-class ArticlesController < ApplicationController
+class ArticlesController < InheritedResources::Base
 	skip_before_action :verify_authenticity_token
 	before_action :article_select, only: [:show, :destroy, :edit, :update, :send_to_approve]
 	before_action :authenticate_user!, except: [:index, :show]
 
 
 	def index
+    @articles = Article.where(life_cycle: 'published')
     if params.has_key?(:category)
       @category = Category.find_by_name(params[:category])
-      @articles = Article.where(category: @category)
+      @articles = @articles.where(category: @category).paginate(page: params[:page])
     else
-		  @articles = Article.all
+		  @articles = @articles.order(:id).paginate(page: params[:page])
     end
 	end
 
@@ -37,7 +38,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-    if @article.life_cycle == 'draft'
+    if @article.life_cycle == 'draft' && @article.user == current_user
   	  if @article.update(article_params)
   	    redirect_to @article, notice: 'ur article was updated bro'
   	  else
@@ -52,6 +53,13 @@ class ArticlesController < ApplicationController
   	@article.destroy
 
   	redirect_to articles_path, notice: 'Ur post was deleted'
+  end
+
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+    redirect_back(fallback_location: root_path) 
+
   end
 
   def send_to_approve
