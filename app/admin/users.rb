@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :encrypted_password, :user_password, :password, :superadmin_role, :supervisor_role, :user_role
+  permit_params :email, :encrypted_password, :current_password, :password, :superadmin_role, :supervisor_role, :user_role
 
   sidebar 'Articles by this User', :only => :show do
     table_for Article.joins(:user).where(:user_id => user.id) do |t|
@@ -11,10 +11,19 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :email
-    column :user_password
-    column :password
     column :user_role
+    column :superadmin_role
+    column :supervisor_role
     actions
+  end
+
+  form do |f|
+    f.input :email
+    f.input :password
+    f.input :user_role
+    f.input :superadmin_role
+    f.input :supervisor_role
+    f.submit
   end
 
   # See permitted parameters documentation:
