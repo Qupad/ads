@@ -1,29 +1,30 @@
 ActiveAdmin.register Article do
   permit_params :title, :text, :life_cycle, :user_id, :category, :published_at, images: []
-  #actions :all, except: :edit
+  actions :all, except: :new
+  actions :all, except: :edit
 
   batch_action :approve do |ids|
     batch_action_collection.find(ids).each do |article|
-      article.update(life_cycle: 'approved') # if article.life_cycle != 'published' && article.life_cycle != 'approved'
+      article.update(life_cycle: 'approved') if article.life_cycle == 'new'
     end
-    redirect_to collection_path, alert: "The advertise have been approved."
+    redirect_to collection_path, alert: "The advertise has been approved."
   end
 
   batch_action :decline do |ids|
     batch_action_collection.find(ids).each do |article|
-      article.update(life_cycle: 'declined') if article.life_cycle != 'published' && article.life_cycle != 'declined'
+      article.update(life_cycle: 'declined') if article.life_cycle == 'new'
     end
-    redirect_to collection_path, alert: "The advertise have been declined."
+    redirect_to collection_path, alert: "The advertise has been declined."
   end
 
   action_item :approve, only: :show do
     @article = Article.find(params[:id])
-    link_to 'Approve', approve_admin_article_path, method: :put if @article.life_cycle != 'published' && @article.life_cycle != 'approved'
+    link_to 'Approve', approve_admin_article_path, method: :put if @article.life_cycle == 'new' || @article.life_cycle != 'approved'
   end
 
   action_item :decline, only: :show do
     @article = Article.find(params[:id])
-    link_to 'Decline', decline_admin_article_path, method: :put if @article.life_cycle != 'published' && @article.life_cycle != 'declined'
+    link_to 'Decline', decline_admin_article_path, method: :put if @article.life_cycle == 'new' || @article.life_cycle != 'declined'
   end
 
   member_action :approve, method: :put do
@@ -39,9 +40,9 @@ ActiveAdmin.register Article do
   end
 
   scope :all
-  scope("Draft") { |scope| scope.where(life_cycle: 'draft') }
-  scope("New") { |scope| scope.where(life_cycle: 'new') }
-  scope("Published", default: true) { |scope| scope.where(life_cycle: 'published') }
+  scope("New", default: true) { |scope| scope.where(life_cycle: 'new') }
+  scope("Approved") { |scope| scope.where(life_cycle: 'approved') }
+  scope("Published") { |scope| scope.where(life_cycle: 'published') }
 
   
   index do
