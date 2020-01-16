@@ -1,10 +1,9 @@
 GIT
-  remote: https://github.com/faker-ruby/faker.git
-  revision: f1c19a6a1a1d18682de5d358d3d8dea9e075cfff
-  branch: master
+  remote: https://github.com/stympy/faker
+  revision: 4db41144492d1c92bbafdd4bae24dfbcac41d5bb
   specs:
-    faker (2.10.0)
-      i18n (>= 1.6, < 1.8)
+    faker (2.10.1)
+      i18n (>= 1.6, < 2)
 
 GEM
   remote: https://rubygems.org/
@@ -107,6 +106,7 @@ GEM
     diff-lcs (1.3)
     erubi (1.9.0)
     execjs (2.7.0)
+    ffaker (2.13.0)
     ffi (1.11.3)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
@@ -249,6 +249,9 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    shoulda (2.11.3)
+    shoulda-matchers (4.2.0)
+      activesupport (>= 4.2.0)
     simple_form (5.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -304,6 +307,7 @@ DEPENDENCIES
   database_cleaner
   devise
   faker!
+  ffaker
   inherited_resources
   jbuilder (~> 2.5)
   jquery-rails
@@ -314,6 +318,8 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  shoulda
+  shoulda-matchers
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
