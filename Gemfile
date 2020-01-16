@@ -42,7 +42,6 @@ gem 'inherited_resources'
 gem 'whenever', require: false
 gem 'kaminari'
 gem 'will_paginate'
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -50,6 +49,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'faker', git: 'https://github.com/stympy/faker'
+  gem 'ffaker'
 end
 
 group :development do
@@ -71,6 +72,8 @@ group :test do
   gem 'chromedriver-helper'
   gem "database_cleaner"
   gem "rspec-rails"
+  gem 'shoulda-matchers'
+  gem 'shoulda'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
