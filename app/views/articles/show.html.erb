@@ -1,32 +1,31 @@
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Title:</strong>
+  <strong><%= (t 'static_pages.index.title') + ': ' %></strong>
   <%= @article.title %>
 </p>
 
 <p>
-  <strong>Text:</strong>
+  <strong><%= (t 'static_pages.index.text') + ': ' %></strong>
   <%= @article.text %>
 </p>
 
 <p>
-  <strong>Author:</strong>
+  <strong><%= (t 'static_pages.index.author') + ': ' %></strong>
   <%= @article.user.email %>
 </p>
 
 <p>
-  <strong>Status:</strong>
+  <strong><%= (t 'static_pages.index.status') + ': ' %></strong>
   <%= @article.life_cycle %>
 </p>
 
 <p>
-  <strong>Type:</strong>
+  <strong><%= (t 'static_pages.index.type') + ': ' %></strong>
   <%= @article.category.name %>
 </p>
 
 <p>
-  <strong>Images:</strong>
+  <strong><%= (t 'static_pages.index.images') + ': ' %></strong>
 </p>
 
 <% @article.images.each do |i| %>
@@ -34,5 +33,5 @@
 <% end %>
 
 <p>
-<%= link_to 'Back', articles_path %>
+<%= link_to (t 'static_pages.index.back'), articles_path %>
 </p>

@@ -30,4 +30,41 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  static_pages:
+    index:
+      title: "Title"
+      status: "Status"
+      text: "Text"
+      author: "Author"
+      type: "Type"
+      forgot: "Forgot your password?"
+      confirm_no: "Didn't receive confirmation instructions?"
+      instruction_no: "Didn't receive unlock instructions?"
+      change_pass: "Change password"
+      send_reset: "Send me reset password instructions"
+
+  global: 
+    forms:
+      submit: "Submit"
+      update: "Update"
+
+  simple_form:
+    labels:
+      article:
+        username: 'User name'
+        password: 'Password'
+        title: "Title"
+        text: "Text"     
+    placeholders:
+      defaults:
+        images: "Choose files"
+
+  helpers:
+    submit:
+      user:
+        create: "Add"
+        update: "Save Changes"
+
+  user:
+    edit:
+      cancel: "Cancel my account"

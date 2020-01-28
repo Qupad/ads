@@ -8,12 +8,12 @@
 
 <% @article.images.each do |i| %>
   <%= image_tag(i, style: 'width:40%') %> 
-  <%= link_to 'Remove', delete_image_attachment_path(i.id),
+  <%= link_to (t 'static_pages.index.remove'), delete_image_attachment_path(i.id),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
 <% end %>
 
 <p>
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<%= link_to (t 'static_pages.index.show'), @article %> |
+<%= link_to (t 'static_pages.index.back'), articles_path %>
 </p>

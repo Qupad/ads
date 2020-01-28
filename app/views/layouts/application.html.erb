@@ -10,11 +10,16 @@
 <html>
   <head>
     <title>Ad</title>
+    <h1><%= link_to (t 'static_pages.index.advertise'), articles_path %></h1>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <ul> 
+      <li><%= link_to 'English', root_path(locale: :en) %></li>
+      <li><%= link_to 'Русский', root_path(locale: :ru) %></li> 
+    </ul>
   </head>
 
   <body>
