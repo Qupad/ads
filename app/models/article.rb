@@ -7,4 +7,7 @@ class Article < ApplicationRecord
   belongs_to :category
   validates :title, presence: true
   validates :text, presence: true
+
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 end
