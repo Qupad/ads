@@ -18,6 +18,7 @@ ru:
       text: "Текст"
       author: "Автор" 
       type: "Категория"
+      published_at: "Опубликовано"
       images: "Изображения"
       back: "Назад"
       show: "Показать"
@@ -41,6 +42,9 @@ ru:
     forms:
       submit: "Подтвердить"
       update: "Сохранить"
+      search: "Найти"
+      sure: "Вы уверены?"
+      send_ad: "Ваше объявление будет отправлено на модерацию. Вы уверены?"
 
   simple_form:
     labels:
@@ -54,6 +58,13 @@ ru:
   user:
     edit:
       cancel: "Удалить аккаунт"
+
+  views:
+    pagination:
+      first: "&laquo; На первую"
+      last: "Последняя &raquo;"
+      previous: "&lsaquo; предующая"
+      next: "Следующая &rsaquo;"
 
   devise:
     confirmations:
