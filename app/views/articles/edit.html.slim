@@ -1,0 +1,15 @@
+h1
+  | Editing Article
+= render 'form', article: @article
+p
+  strong
+    | Images:
+- @article.images.each do |i|
+  = image_tag(i, style: 'width:40%')
+  = link_to (t 'static_pages.index.remove'), delete_image_attachment_path(i.id),
+  -               method: :delete,
+  -               data: { confirm: 'Are you sure?' }
+p
+  = link_to (t 'static_pages.index.show'), @article
+  |  | 
+  = link_to (t 'static_pages.index.back'), articles_path
