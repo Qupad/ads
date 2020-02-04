@@ -4,6 +4,6 @@ class AddUserToArticles < ActiveRecord::Migration[5.2]
   end
 
   def self.down
-  	remove_reference(:articles, :user, index: true, foreign_key: true)
+    remove_reference(:articles, :user, index: true, foreign_key: true)
   end
 end

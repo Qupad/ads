@@ -4,6 +4,6 @@ class AddCategoryToArticle < ActiveRecord::Migration[5.2]
   end
 
   def self.down
-  remove_reference(:articles, :category, index: true, foreign_key: true)
-	end
+    remove_reference(:articles, :category, index: true, foreign_key: true)
+  end
 end

@@ -1,10 +1,9 @@
-set :output, "log/cron_log.log"
+set :output, 'log/cron_log.log'
 set :environment, 'development'
 
-
-every 1.day, at: '12:50 pm' do 
-	rake 'ads:publish'
-	rake 'ads:archive'
+every 1.day, at: '12:50 pm' do
+  rake 'ads:publish'
+  rake 'ads:archive'
 end
 
 # Use this file to easily define all of your cron jobs.
