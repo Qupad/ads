@@ -16,14 +16,14 @@
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require bootstrap-sprockets
 
 $(function() {
   $("#articles th a, #articles .pagination a").live("click", function() {
     $.getScript(this.href);
-    return false;
-  });
-  $("#articles_search input").keyup(function() {
-    $.get($("#articles_search").attr("action"), $("#articles_search").serialize(), null, "script");
     return false;
   });
 });
