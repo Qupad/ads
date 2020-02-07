@@ -12,14 +12,22 @@ require 'faker'
 
 # AdminUser.create!(email: 'admin@a.a', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-first = User.create(email: '1@1.1', password: '111111')
+def set_date(stat)
+  Time.zone.now if stat == 'published'
+end
+
+first = User.create(email: '6@1.1', password: '111111')
 second = User.create(email: '2@2.2', password: '111111')
 buy = Category.create(name: 'Buying', description: 'To buy something')
 sell = Category.create(name: 'Selling', description: 'To sell something u dont want')
 hire = Category.create(name: 'Hiring', description: 'To do work that u dont want to do')
 
-10.times do
-  Article.create(title: 'Buy ' + FFaker::AnimalUS.common_name, text: Faker::Lorem.sentence, user: first, category: buy)
-  Article.create(title: 'Sell ' + FFaker::AnimalUS.common_name, text: Faker::Lorem.sentence, user: first, category: sell)
-  Article.create(title: 'Hire ' + Faker::Company.profession, text: Faker::Lorem.sentence, user: first, category: hire)
+status = %w[draft new approved declined published archived]
+
+20.times do
+  status.each do |stat|
+    Article.create(title: 'Buy ' + FFaker::AnimalUS.common_name, text: Faker::Lorem.sentence, user: first, category: buy, life_cycle: stat, published_at: set_date(stat))
+    Article.create(title: 'Sell ' + FFaker::AnimalUS.common_name, text: Faker::Lorem.sentence, user: first, category: sell, life_cycle: stat, published_at: set_date(stat))
+    Article.create(title: 'Hire ' + Faker::Company.profession, text: Faker::Lorem.sentence, user: first, category: hire, life_cycle: stat, published_at: set_date(stat))
+  end
 end
