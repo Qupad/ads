@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'activeadmin'
+gem 'bootstrap', '~> 4.4.1'
 gem 'cancancan'
 gem 'devise'
 gem 'elasticsearch-model'
@@ -47,6 +48,7 @@ gem 'rubocop', require: false
 gem 'simple_form'
 gem 'slim'
 gem 'slim-rails'
+gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'whenever', require: false
 gem 'will_paginate'
 
