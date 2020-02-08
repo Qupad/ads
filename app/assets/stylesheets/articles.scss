@@ -1,6 +1,7 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 th a.current{
   padding-right: 12px;
   background-repeat: no-repeat;
@@ -13,4 +14,8 @@ th .asc {
 
 th .desc {
   background-image: url('down_arrow.gif');
+}
+
+body {
+	margin-left: 10px;
 }

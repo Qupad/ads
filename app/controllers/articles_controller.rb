@@ -1,11 +1,11 @@
 class ArticlesController < InheritedResources::Base
   skip_before_action :verify_authenticity_token
   before_action :article_select, only: %i[show destroy edit update send_to_approve]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show search]
   helper_method :sort_column, :sort_direction
 
   def index
-    @articles = Article.where(life_cycle: 'published').includes(:user, :category).search(params[:search]).order(sort_column + ' ' + sort_direction)
+    @articles = Article.where(life_cycle: 'published').includes(:user, :category).order(sort_column + ' ' + sort_direction)
     if params.has_key?(:category)
       @category = Category.find_by_name(params[:category])
       @articles = @articles.where(category: @category).paginate(page: params[:page])
@@ -68,19 +68,20 @@ class ArticlesController < InheritedResources::Base
     end
   end
 
+  def search
+    search = params[:search_articles].presence && params[:search_articles][:search]
+    @articles = Article.search_published(search).records if search
+  end
+
   private
 
   def article_params
     params.require(:article).permit(:title, :text, :category_id, images: [])
   end
 
-  private
-
   def article_select
     @article = Article.includes(:user, :category).find(params[:id])
   end
-
-  private
 
   def sort_column
     Article.column_names.include?(params[:sort]) ? params[:sort] : 'title'

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do 
+  scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     devise_for :admin_users, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
     resources :categories
@@ -7,9 +7,13 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       passwords: 'users/passwords',
       registrations: 'users/registrations'
-  	}
+    }
 
-    resources :articles
+    resources :articles do
+      collection do
+        get :search
+      end
+    end
 
     delete 'articles/:id/delete_image_attachment' => 'articles#delete_image_attachment', as: 'delete_image_attachment'
 
