@@ -27,13 +27,13 @@ table
   - @articles.each do |article|
     tr
       td
-        = article.user.email
-      td
         = article.title
       td
-        = article.life_cycle
+        = article.life_cycle 
       td
-        = article.text
+        = article.text 
+      td
+        = article.user.email
       td
         = article.category.name
       - if article.life_cycle == 'draft' || article.life_cycle == 'declined' || article.life_cycle == 'archived'

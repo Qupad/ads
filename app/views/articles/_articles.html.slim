@@ -1,3 +1,29 @@
 = hidden_field_tag :direction, params[:direction]
 = hidden_field_tag :sort, params[:sort]
 = paginate @articles
+table[cellspacing="0" border="1" width="1300"]
+  thead
+    tr
+      th
+        = sortable 'title', (t 'static_pages.index.title')
+      th
+        = t 'static_pages.index.text'
+      th
+        = sortable 'user_id', (t 'static_pages.index.author')
+      th
+        = sortable 'category_id', (t 'static_pages.index.type')
+      th
+        = sortable 'published_at', (t 'static_pages.index.published_at')
+  tbody
+    - @articles.each do |article|
+      tr
+        td
+          = link_to article.title, article_path(article)
+        td
+          = article.text
+        td
+          = article.user.email
+        td
+          = article.category.name
+        td
+          = article.published_at

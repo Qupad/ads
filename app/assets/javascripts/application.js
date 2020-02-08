@@ -22,7 +22,7 @@
 //= require bootstrap-sprockets
 
 $(function() {
-  $("#articles th a, #articles .pagination a").live("click", function() {
+  $("#articles").live("click", function() {
     $.getScript(this.href);
     return false;
   });
