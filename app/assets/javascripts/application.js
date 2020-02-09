@@ -12,17 +12,17 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require jquery3
 //= require popper
 //= require bootstrap
 //= require bootstrap-sprockets
+//= require active_admin.js
 
 $(function() {
-  $("#articles").live("click", function() {
+  $("#articles").on("click", 'a' ,function() {
     $.getScript(this.href);
     return false;
   });
