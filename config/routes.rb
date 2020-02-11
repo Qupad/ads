@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     devise_for :admin_users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
+    ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
     resources :categories
     devise_for :users, controllers: {
       sessions: 'users/sessions',
