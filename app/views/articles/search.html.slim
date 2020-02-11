@@ -1,0 +1,33 @@
+= form_for :search_articles, url: search_articles_path, :method => 'get' do |f|
+  p
+    = f.text_field :search, value: params[:search_articles].presence && params[:search_articles][:search]
+    = f.submit (t 'global.forms.search'), :title => nil
+table[cellspacing="0" border="1" width="1300"]
+  thead
+    tr
+      th
+        = sortable 'title', (t 'static_pages.index.title')
+      th
+        = t 'static_pages.index.text'
+      th
+        = sortable 'user_id', (t 'static_pages.index.author')
+      th
+        = sortable 'category_id', (t 'static_pages.index.type')
+      th
+        = sortable 'published_at', (t 'static_pages.index.published_at')
+      th[colspan="3"]
+  tbody
+    - @articles.each do |article|
+      tr
+        td
+          = article.title
+        td
+          = article.text
+        td
+          = article.user.email
+        td
+          = article.category.name
+        td
+          = article.published_at
+        td
+          = link_to (t 'static_pages.index.show'), article_path(article)

@@ -21,6 +21,7 @@ ru:
       published_at: "Опубликовано"
       images: "Изображения"
       back: "Назад"
+      actions: "Действия"
       show: "Показать"
       remove: "Убрать"
       delete: "Удалить"

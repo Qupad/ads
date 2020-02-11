@@ -1,0 +1,40 @@
+table[cellspacing="0" border="1" width="1300" cols="10" rules="all"]
+  thead
+    tr
+      th
+        = sortable 'title', (t 'static_pages.index.title')
+      th
+        = sortable 'life_cycle', (t 'static_pages.index.status')
+      th
+        = t 'static_pages.index.text'
+      th
+        = t 'static_pages.index.author'
+      th
+        = sortable 'category_id', (t 'static_pages.index.type')
+      th[colspan='4'] 
+        = t 'static_pages.index.actions'
+  tbody  
+    - @articles.each do |article|
+      tr
+        td
+          = link_to article.title, article_path(article)
+        td
+          = article.life_cycle 
+        td
+          = article.text 
+        td
+          = article.user.email
+        td
+          = article.category.name
+        td[colspan="2"]
+          = link_to (t 'static_pages.index.delete'), article_path(article), :method => :delete, data: { confirm: (t 'global.forms.sure') }
+        - if article.life_cycle == 'draft' || article.life_cycle == 'declined' || article.life_cycle == 'archived'
+          td
+            = link_to (t 'static_pages.index.edit'), edit_article_path(article)
+          td
+            = link_to (t 'static_pages.index.send'), send_to_approve_path(article), data: { confirm: (t 'global.forms.send_ad') }
+        - else
+          td
+          td
+
+= paginate @articles
