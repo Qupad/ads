@@ -36,7 +36,7 @@ class ArticlesController < InheritedResources::Base
   end
 
   def update
-    if @article.life_cycle == 'draft' && @article.user == current_user
+    if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived' && @article.user == current_user
       if @article.update(article_params)
         redirect_to @article, notice: 'ur advertise was updated'
       else
