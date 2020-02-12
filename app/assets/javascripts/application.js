@@ -22,7 +22,7 @@
 //= require active_admin.js
 
 $(function() {
-  $("#articles").on("click", 'a' ,function() {
+  $("#table").on("click", 'th' ,function() {
     $.getScript(this.href);
     return false;
   });
