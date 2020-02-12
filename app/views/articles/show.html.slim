@@ -27,4 +27,4 @@ div[class="container"]
   - @article.images.each do |i|
     = image_tag(i, style: 'width:40%')
   p
-    = link_to (t 'static_pages.index.back'), articles_path
+    = link_to (t 'static_pages.index.back'), url_for(:back)
