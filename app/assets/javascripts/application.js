@@ -27,3 +27,10 @@ $(function() {
     return false;
   });
 });
+
+$(function() {
+  $("#add").on("click", 'input' ,function() {
+		var clone = this.cloneNode(true);  
+    this.parentNode.appendChild(clone);
+	});
+});
