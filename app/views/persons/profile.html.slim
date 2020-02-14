@@ -7,7 +7,7 @@ h1
 = link_to  (t 'static_pages.index.advertise_new'), new_article_path
 p
   = (t 'static_pages.index.advertise_my') + ':'
-div[style="position: absolute; top: 0; right: 0 "]
+div[style="position: absolute; top: 0; right: 10px"]
   span
     = (t 'static_pages.index.hi') + ', ' + (current_user.email)
   = link_to  (t 'static_pages.index.settings'), edit_user_registration_path
