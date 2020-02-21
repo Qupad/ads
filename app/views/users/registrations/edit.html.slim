@@ -1,41 +1,37 @@
-h2
-  = t 'static_pages.index.edit'
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
+.container.mt-2: .card.mb: .card-body
+  h2= t 'static_pages.index.edit'
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .field
+      = f.input :email
       br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit (t 'global.forms.update')
-h3
-  = t 'user.edit.cancel'
-p
-  | Unhappy? 
-  = button_to (t 'user.edit.cancel'), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to (t 'static_pages.index.back'), :back
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      div
+        | Currently waiting confirmation for: 
+        = resource.unconfirmed_email
+    .field
+      = f.input :password
+      i
+        | (leave blank if you don't want to change it)
+      br
+      - if @minimum_password_length
+        br
+        em
+          = @minimum_password_length
+          |  characters minimum
+    .field
+      = f.input :password_confirmation
+      br
+    .field
+      = f.input :current_password
+      i
+        | (we need your current password to confirm your changes)
+      br
+    .actions
+      = f.submit (t 'global.forms.update'),class: 'btn btn-info'
+  h3
+    = t 'user.edit.cancel'
+  p
+    | Unhappy? 
+    = button_to (t 'user.edit.cancel'), registration_path(resource_name), class: 'btn btn-danger', data: { confirm: "Are you sure?" }, method: :delete
+  = link_to (t 'static_pages.index.back'), :back, class: 'btn btn-outline-primary'

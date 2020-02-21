@@ -1,11 +1,11 @@
-h2
-  = t 'static_pages.index.forgot'
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .actions
-    = f.submit (t 'static_pages.index.send_reset')
-= render "users/shared/links"
+.container.mt-2: .card.mb: .card-body
+	h2= t 'static_pages.index.forgot'
+	= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+	  = render "devise/shared/error_messages", resource: resource
+	  .field
+	    = f.label :email
+	    br
+	    = f.email_field :email, autofocus: true, autocomplete: "email"
+	  .actions
+	    = f.submit (t 'static_pages.index.send_reset'), class: 'btn btn-info mt-1'
+	= render "users/shared/links"
