@@ -2,16 +2,10 @@
 = hidden_field_tag :sort, params[:sort]
 p#notice
   = notice
-h1
-  = t 'static_pages.index.profile'
-= link_to  (t 'static_pages.index.advertise_new'), new_article_path
+h1= t 'static_pages.index.profile'
+= link_to  (t 'static_pages.index.advertise_new'), new_article_path, class: 'btn btn-success'
 p
   = (t 'static_pages.index.advertise_my') + ':'
-div[style="position: absolute; top: 0; right: 10px"]
-  span
-    = (t 'static_pages.index.hi') + ', ' + (current_user.email)
-  = link_to  (t 'static_pages.index.settings'), edit_user_registration_path
-  p
-    = link_to (t 'static_pages.index.home'), controller: 'articles'
+
 div id="articles"  
   = render 'articles'
