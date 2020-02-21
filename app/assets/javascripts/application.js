@@ -10,14 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery3
 //= require popper
-//= require bootstrap
 //= require bootstrap-sprockets
 //= require active_admin.js
 
@@ -30,7 +28,7 @@ $(function() {
 
 $(function() {
   $("#add").on("click", 'input' ,function() {
-		var clone = this.cloneNode(true);  
+    var clone = this.cloneNode(true);  
     this.parentNode.appendChild(clone);
-	});
+  });
 });

@@ -1,51 +1,85 @@
 <!DOCTYPE html>
 <% unless flash.empty? %>
-   <script type="text/javascript">
-      <% flash.each do |f| %>
-    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-     toastr['<%= type %>']('<%= f[1] %>');
-   <% end %>
-   </script>
+  <script type="text/javascript">
+    <% flash.each do |f| %>
+      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+         toastr['<%= type %>']('<%= f[1] %>');
+    <% end %>
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <% end %>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://blackrockdigital.github.io/startbootstrap-grayscale/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="http://blackrockdigital.github.io/startbootstrap-grayscale/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="http://blackrockdigital.github.io/startbootstrap-grayscale/css/grayscale.min.css" rel="stylesheet">
-    <link href="http://blackrockdigital.github.io/startbootstrap-grayscale/css/grayscale.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="https://blackrockdigital.github.io/startbootstrap-freelancer/css/freelancer.min.css" rel="stylesheet">
     
-    <div class="container d-flex h-100 align-items-center">
-      <title>Ad</title>
-      <h1 class="text-white-50 mx-auto mt-2 mb-5"><%= link_to (t 'static_pages.index.advertise'), articles_path %></h1>
-      <%= csrf_meta_tags %>
-      <%= csp_meta_tag %>
-    </div>
     <%= stylesheet_link_tag    'articles', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <ul> 
-      <li><%= link_to 'English', root_path(locale: :en) %></li>
-      <li><%= link_to 'Русский', root_path(locale: :ru) %></li> 
-    </ul>
-  </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase sticky-top" id="mainNav">
+      <a class="navbar-brand"> <%= link_to (t 'static_pages.index.advertise'), articles_path %></a>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= (t 'static_pages.index.type') %> </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.all.each do |cat| %>
+                <%= link_to cat.name, articles_path(category: cat.name), :class => "dropdown-item" %>
+              <%end%>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= t 'static_pages.index.language' %></a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'English', root_path(locale: :en), :class => "dropdown-item" %>
+              <%= link_to 'Русский', root_path(locale: :ru), :class => "dropdown-item" %>
+            </div>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= current_user.email %> </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <%= link_to (t 'static_pages.index.profile'), persons_profile_path, :class => "dropdown-item" %>
+                <%= link_to  (t 'static_pages.index.settings'), edit_user_registration_path, :class => "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to (t 'static_pages.index.log_out'), destroy_user_session_path, :method => :delete, :class => "dropdown-item" %>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item ">
+              <%= link_to (t 'static_pages.index.log_in'), new_user_session_path, :class => "nav-link" %>
+            </li>
+            <li class="nav-item ">
+              <%= link_to (t 'static_pages.index.registration'), new_user_registration_path, :class => "nav-link" %>
+            </li>
+          <%end%>
+        </ul>
+      </div>
+    </nav>
+
+
+    <title>Ad</title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
   </head>
 
   <body>
+    <div id='content'>
     <%= yield %>
+    </div>
   </body>
 
-  <!-- Footer -->
-<footer class="bg-black small text-center text-white-50">
+<!-- Footer -->
+<footer class="copyright py-4 text-center text-white mt-3">
   <div class="container">
-    Copyright &copy; My website, ye 2k20
+    <small>Copyright &copy; EasyAdvertise 2020</small>
   </div>
 </footer>
 </html>
