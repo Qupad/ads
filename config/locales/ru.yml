@@ -38,6 +38,8 @@ ru:
       instruction_no: "Не получили инструкцию по разблокировке?"
       change_pass: "Изменить пароль"
       send_reset: "Отправить инстукцию по сбросу пароля"
+      language: "Язык"
+      edit_art: "Редактирование"
 
   global: 
     forms:

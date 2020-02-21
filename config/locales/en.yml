@@ -43,6 +43,14 @@ en:
       instruction_no: "Didn't receive unlock instructions?"
       change_pass: "Change password"
       send_reset: "Send me reset password instructions"
+      profile: "Profile"
+      log_out: "Log out"
+      registration: "Registration"
+      laguage: "Language"
+      advertise_new: "New advertise"
+      edit: "Edit"
+      edit_art: "Editing article"
+      advertise_my: "My advertise"
 
   global: 
     forms:
