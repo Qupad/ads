@@ -1,8 +1,9 @@
-= form_for :search_articles, url: search_articles_path, :method => 'get' do |f|
-  p
-    = f.text_field :search, value: params[:search_articles].presence && params[:search_articles][:search]
-    = f.submit (t 'global.forms.search'), :title => nil
-table[cellspacing="0" border="1" width="1300"]
+div class="form-inline mt-2"
+  = form_for :search_articles, url: search_articles_path, :method => 'get', :id => "articles_search" do |f|
+    = f.text_field :search, value: params[:search_articles].presence && params[:search_articles][:search], :class => "form-control mr-sm-2"
+    = f.submit (t 'global.forms.search'), :title => nil, :class => "btn btn-outline-success my-2 my-sm-0"
+
+table[cellspacing="0" border="1" width="1300" class="table col-auto mt-2"]
   thead
     tr
       th
@@ -15,12 +16,11 @@ table[cellspacing="0" border="1" width="1300"]
         = sortable 'category_id', (t 'static_pages.index.type')
       th
         = sortable 'published_at', (t 'static_pages.index.published_at')
-      th[colspan="3"]
   tbody
     - @articles.each do |article|
       tr
         td
-          = article.title
+          = link_to article.title, article_path(article)
         td
           = article.text
         td
@@ -29,5 +29,3 @@ table[cellspacing="0" border="1" width="1300"]
           = article.category.name
         td
           = article.published_at
-        td
-          = link_to (t 'static_pages.index.show'), article_path(article)

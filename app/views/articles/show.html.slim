@@ -1,29 +1,30 @@
 p#notice
   = notice
-p
-  strong
-    = (t 'static_pages.index.title') + ': '
-  = @article.title
-p
-  strong
-    = (t 'static_pages.index.text') + ': '
-  = @article.text
-p
-  strong
-    = (t 'static_pages.index.author') + ': '
-  = @article.user.email
-p
-  strong
-    = (t 'static_pages.index.status') + ': '
-  = @article.life_cycle
-p
-  strong
-    = (t 'static_pages.index.type') + ': '
-  = @article.category.name
-p
-  strong
-    = (t 'static_pages.index.images') + ': '
-- @article.images.each do |i|
-  = image_tag(i, style: 'width:40%')
-p
-  = link_to (t 'static_pages.index.back'), url_for(:back)
+.container-fluid.mt-2: .card.mb: .card-body 
+  p
+    strong
+      h1.text-center= @article.title
+  p
+    strong
+      = (t 'static_pages.index.author') + ': '
+    = @article.user.email
+  p
+    strong
+      = (t 'static_pages.index.status') + ': '
+    = @article.life_cycle
+  p
+    strong
+      = (t 'static_pages.index.type') + ': '
+    = @article.category.name
+  p
+    strong
+      = (t 'static_pages.index.text') + ': '
+    = @article.text
+  p
+    strong
+      = (t 'static_pages.index.images') + ': '
+  - @article.images.each do |i|
+    = image_tag(i, style: 'width:40%')
+  p
+    = link_to (t 'static_pages.index.back'), url_for(:back), class: 'btn btn-danger mx-1 mt-1'
+    = link_to (t 'static_pages.index.edit'), edit_article_path(@article), class: 'btn btn-warning mt-1' if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived'

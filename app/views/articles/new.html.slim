@@ -1,4 +1,4 @@
-h1
-  = t 'static_pages.index.advertise_new'
-= render 'form', article: @article
-= link_to (t 'static_pages.index.back'), articles_path
+.container-fluid.mt-2: .card.mb: .card-body
+	h1.text-center= t 'static_pages.index.advertise_new'
+	= render 'form', article: @article
+	= link_to (t 'static_pages.index.back'), articles_path, class: 'btn btn-danger mt-2'
