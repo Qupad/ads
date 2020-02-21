@@ -68,6 +68,7 @@ ru:
       last: "Последняя &raquo;"
       previous: "&lsaquo; предующая"
       next: "Следующая &rsaquo;"
+      truncate: "..."
 
   devise:
     confirmations:
