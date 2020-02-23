@@ -65,4 +65,9 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+config/database.yml
+config/credentials.yml.enc
+config/storage.yml
+config/cable.yml
+
 app/views/old views
