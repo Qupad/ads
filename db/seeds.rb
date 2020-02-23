@@ -10,7 +10,7 @@
 require 'ffaker'
 require 'faker'
 
-# AdminUser.create!(email: 'admin@a.a', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@a.a', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 def set_date(stat)
   Time.zone.now if stat == 'published'
