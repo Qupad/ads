@@ -8,37 +8,37 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :text, presence: true
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
 
-  Article.import
+  # Article.import
 
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :title
-      indexes :text
-    end
-  end
+  # settings index: { number_of_shards: 1 } do
+  #   mappings dynamic: 'false' do
+  #     indexes :title
+  #     indexes :text
+  #   end
+  # end
 
-  def self.search_published(query)
-    __elasticsearch__.search(
-      query: {
-        bool: {
-          must: [
-            {
-              multi_match: {
-                query: query,
-                fields: %i[title text]
-              }
-            },
-            {
-              match: {
-                life_cycle: 'published'
-              }
-            }
-          ]
-        }
-      }
-    )
-  end
+  # def self.search_published(query)
+  #   __elasticsearch__.search(
+  #     query: {
+  #       bool: {
+  #         must: [
+  #           {
+  #             multi_match: {
+  #               query: query,
+  #               fields: %i[title text]
+  #             }
+  #           },
+  #           {
+  #             match: {
+  #               life_cycle: 'published'
+  #             }
+  #           }
+  #         ]
+  #       }
+  #     }
+  #   )
+  # end
 end
