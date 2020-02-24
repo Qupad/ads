@@ -51,6 +51,8 @@ gem 'slim-rails'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'whenever', require: false
 gem 'will_paginate'
+gem 'faker', git: 'https://github.com/stympy/faker'
+gem 'ffaker'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -59,8 +61,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner'
-  gem 'faker', git: 'https://github.com/stympy/faker'
-  gem 'ffaker'
   gem 'rspec-rails'
 end
 
