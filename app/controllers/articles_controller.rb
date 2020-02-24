@@ -16,11 +16,15 @@ class ArticlesController < InheritedResources::Base
 
   def show; end
 
-  def edit; end
+  def edit
+    if @article.user != current_user
+      redirect_to articles_path, notice: 'ERROR'
+    end
+  end
 
   def new
     @article = Article.new
-   end
+  end
 
   def create
     @article = Article.new(article_params)
@@ -36,7 +40,7 @@ class ArticlesController < InheritedResources::Base
   end
 
   def update
-    if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived' && @article.user == current_user
+    if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived' and @article.user == current_user
       if @article.update(article_params)
         redirect_to @article, notice: 'ur advertise was updated'
       else
