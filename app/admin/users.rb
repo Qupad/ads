@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
   permit_params :email, :encrypted_password, :current_password, :password, :superadmin_role, :supervisor_role, :user_role
+  before_action :remove_password_params_if_blank, only: [:update]
 
   sidebar 'Articles by this User', :only => :show do
     table_for Article.joins(:user).where(:user_id => user.id) do |t|
@@ -24,6 +25,16 @@ ActiveAdmin.register User do
     f.input :superadmin_role
     f.input :supervisor_role
     f.submit
+  end
+
+
+  controller do
+    def remove_password_params_if_blank
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
+    end
   end
 
   # See permitted parameters documentation:
