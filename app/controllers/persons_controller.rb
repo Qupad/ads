@@ -2,7 +2,7 @@ class PersonsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def profile
-    @articles = Article.where(user: current_user).includes(:user, :category).order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
+    @articles = current_user.articles.order(sort_column + ' ' + sort_direction).paginate(page: params[:page])
   end
 
   private
