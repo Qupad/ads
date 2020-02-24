@@ -71,3 +71,5 @@ config/storage.yml
 config/cable.yml
 
 app/views/old views
+# Ignore master key for decrypting credentials and more.
+/config/master.key
