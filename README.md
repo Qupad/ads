@@ -1,7 +1,11 @@
 # README
 
-http://localhost:3000/admin
+Online version (deploy branch)
+https://ancient-reef-38805.herokuapp.com/
 
-  admin@a.a
+Admin panel
+https://ancient-reef-38805.herokuapp.com/admin
 
-  password
+login:  admin@a.a
+
+pass:   password
