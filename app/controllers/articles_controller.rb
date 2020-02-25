@@ -1,8 +1,9 @@
 class ArticlesController < InheritedResources::Base
   skip_before_action :verify_authenticity_token
-  before_action :article_select, only: %i[show destroy edit update send_to_approve]
+  before_action :article_select, only: %i[send_to_approve]
   before_action :authenticate_user!, except: %i[index show search]
   helper_method :sort_column, :sort_direction
+  load_and_authorize_resource except: %i[index search delete_image_attachment send_to_approve]
 
   def index
     @articles = Article.where(life_cycle: 'published').includes(:user, :category).order(sort_column + ' ' + sort_direction)
@@ -17,9 +18,7 @@ class ArticlesController < InheritedResources::Base
   def show; end
 
   def edit
-    if @article.user != current_user
-      redirect_to articles_path, notice: 'ERROR'
-    end
+    redirect_to articles_path, notice: 'ERROR' if @article.user != current_user
   end
 
   def new
@@ -40,7 +39,7 @@ class ArticlesController < InheritedResources::Base
   end
 
   def update
-    if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived' and @article.user == current_user
+    if @article.life_cycle == 'draft' || @article.life_cycle == 'declined' || @article.life_cycle == 'archived' && (@article.user == current_user)
       if @article.update(article_params)
         redirect_to @article, notice: 'ur advertise was updated'
       else
