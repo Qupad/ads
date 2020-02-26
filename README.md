@@ -1,7 +1,9 @@
 # README
 
-http://localhost:3000/admin
+EasyAdvertise
 
-  admin@a.a
+admin page: http://localhost:3000/admin
 
-  password
+login  admin@a.a
+
+pass   password
